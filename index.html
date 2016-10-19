@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en" ng-app='twitter-sounds'>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="horizontal Keyboard">
+<meta name="author" content="Austin B. Hodge">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Marmelad|Baumans' rel='stylesheet' type='text/css'>
+    <link href='assets/css/main.min.css' rel='stylesheet'>
+    <script src='bower_components/angular/angular.js'></script>
+    <script src='bower_components/angular-animate/angular-animate.js'></script>
+    <script src='bower_components/angular-material/angular-material.js'></script>
+    <script src='bower_components/angular-ui-router/release/angular-ui-router.js'></script>
+    <script src='bower_components/angular-socket-io/socket.js'></script>
+
+    <script src="bower_components/midi/inc/shim/Base64.js" type="text/javascript"></script>
+    <script src="bower_components/midi/inc/shim/Base64binary.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/util/dom_request_script.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/util/dom_request_xhr.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/midi/synesthesia.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/midi/plugin.webmidi.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/midi/plugin.webaudio.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/midi/plugin.audiotag.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/midi/player.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/midi/loader.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/midi/audioDetect.js" type="text/javascript"></script>
+    <script src="bower_components/midi/js/midi/gm.js" type="text/javascript"></script>
+    <script src="bower_components/midi/build/MIDI.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+      window.onload = function () {
+        MIDI.loadPlugin({
+          soundfontUrl: "",
+          instrument: "acoustic_grand_piano",
+          callback: function() {
+            angular.element('body').addClass('loaded');
+          }
+        });
+      };
+    </script>
+    <script src='assets/js/main.min.js'></script>
+  </head>
+  <body layout='row' flex='80%' layout-align='center'>
+      <div class="waterWall-left">
+      </div>
+      <div class="waterfall">
+      </div>
+      <div class="waterWall-right">
+      </div>
+      <div class="piano"  ng-controller="PianoController">
+        <div ng-repeat='key in keys' class='note'>
+          <key ng-style='kstyle' midi='key.midi' down='false' pressed='pressToggle()' ng-class="key.keyType=='B' ? 'black-key' : 'white-key'" ></key>
+          <div ng-class="key.keyType=='B' ? 'black-key-bottom' : 'white-key-bottom'"></div>
+          <div ng-class="key.keyType=='B' ? 'black-key-side' : 'white-key-side'"></div>
+          <div ng-class="key.keyType=='B' ? 'black-key-side-2' : 'white-key-side'"></div>
+        </div>
+      </div>
+  </body>
+</html>
